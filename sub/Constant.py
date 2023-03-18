@@ -1,0 +1,1 @@
+API_EXAMPLE = "https://api.finance.naver.com/siseJson.naver?symbol=005930&requestType=1&startTime=20140817&endTime=20210605&timeframe=week"
