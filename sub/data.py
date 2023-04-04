@@ -7,7 +7,7 @@ from io import BytesIO
 def get_date_stock(date: str = datetime.datetime.today().strftime("%Y%m%d"), next_timedelta=1) -> pd.DataFrame:
 	gen_otp_url = 'http://data.krx.co.kr/comm/fileDn/GenerateOTP/generate.cmd'
 	gen_otp_data = {
-		'mktId': 'KSQ', #ALL: 전체, STK: 코스피, KSQ: 코스닥
+		'mktId': 'STK', #ALL: 전체, STK: 코스피, KSQ: 코스닥
 		'trdDd': date,
 		'money': '1',
 		'csvxls_isNo': 'false',
