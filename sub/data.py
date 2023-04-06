@@ -19,6 +19,7 @@ def get_date_stock(date: str = datetime.datetime.today().strftime("%Y%m%d"), nex
 	down_url = 'http://data.krx.co.kr/comm/fileDn/download_csv/download.cmd'
 	down_sector_KS  = requests.post(down_url, {'code':otp}, headers=headers)
 	data = pd.read_csv(BytesIO(down_sector_KS.content), encoding='EUC-KR')
+	#print(data)
 	if pd.isna(data.loc[0,'시가총액']):
 		yasterday = datetime.datetime.strptime(date, "%Y%m%d") + datetime.timedelta(days=next_timedelta)
 		return get_date_stock(yasterday.strftime("%Y%m%d"),next_timedelta=next_timedelta)
