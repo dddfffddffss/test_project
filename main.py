@@ -18,7 +18,7 @@ def ddd():
 	stk_pool_2017_2020={'015260', '001065', '099340', '002140', '103590', '009140', '001620', '001067', '004365', '037270', '133820', '013700', '003010', '083380', '019490', '004310', '001755', '001020', '000590', '155660', '010640', '001270', '004720', '003415', '010770', '002785', '000547', '003465', '001529', '002780', '004100', '011700', '004415', '006740', '004410', '006890', '005725', '001260', '001527', '000040', '011230', '001515', '077970', '000545', '004545', '090080', '004105', '002995', '025890', '002787', '002760', '083420', '023800', '005745', '002880', '000225', '001525', '071970', '009070', '009470', '083370', '024900', '007540', '012600', '001745', '016740', '001290'}
 	#print(len(stk_pool))
 	wallet = {}
-	dh = data.data_handler(start_date = "20210901", analysis_period=10)
+	dh = data.data_handler(start_date = "20211203", analysis_period=10)
 
 	counter, result = 50, 0
 	current_sum, buy_sum, buy_part_sum = 1, 1, 1
@@ -38,8 +38,8 @@ def ddd():
 					result += 1
 					current_sum += current
 					buy_part_sum += denominator
-				elif (len(wallet)>150):
-					break
+				#elif (len(wallet)>150):
+				#	break
 				elif (np.std(indexed_l)<0.5) and (ticker not in wallet):
 					temp = int(current_data[ticker]["종가"])
 					wallet[ticker] = temp
@@ -58,7 +58,8 @@ def ddd():
 
 		# 2달 뒤 총 수익률 5%이상이면 모두 매수하고 다시 처음부터 전략 시작
 		earn_rate, temp = ((current_sum+temp)/buy_sum-1) * 100, 0
-		if (_ % counter == counter-1) and (earn_rate>5):
+		if (_ % counter == counter-1) and (earn_rate>-1):
+			print("손절!")
 			for ticker in list(wallet):
 				result += 1
 				denominator = wallet.pop(ticker, None)
